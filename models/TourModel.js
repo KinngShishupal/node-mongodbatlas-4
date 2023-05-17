@@ -98,6 +98,13 @@ const tourSchema = new mongoose.Schema(
       day:Number
         }
       }
+    ],
+    // guides:Array, // here we will put all the guides ids who are engaged with this tour embedding example
+    guides:[
+      {
+        type: mongoose.Schema.ObjectId,
+        ref:'User', // User coolection is the reference here
+      }
     ]
   },
   {
@@ -120,6 +127,13 @@ tourSchema.pre('save', function (next) {
   this.name = this.name.toUpperCase(); // this simple converts the name to uppercase
   next();
 });
+
+// connecting user document into tour document by Embedding
+// tourSchema.pre('save',  async function (next) {
+//    const guidesPromises = this.guides.map(async id=>await User.findById(id)); // this is an array full of promises
+//    this.guides = await Promise.all(guidesPromises);
+//   next();
+// });
 
 // runs after .save() and .create()
 // doc here is currently processed data
