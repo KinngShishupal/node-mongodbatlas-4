@@ -216,7 +216,8 @@ const getAllTours = async (req, res) => {
 
 const getTour = async (req, res, next) => {
   try {
-    const tour = await Tour.findById(req.params.id);
+    
+    const tour = await Tour.findById(req.params.id)
     // Tour.findOne({_id:req.params.id}) same result as above
     if (!tour) {
       return next(new AppError('No Tour Found With this id', 404));

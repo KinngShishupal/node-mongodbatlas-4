@@ -161,7 +161,18 @@ tourSchema.pre('save', function (next) {
 // all the commands that starts with find(find, findById, findOne etc) will not include secret tour
 tourSchema.pre(/^find/, function (next) {
   // we dont want to send secret tour to client
+  // since it is a query middleware this always points to current query
   this.find({ secretTour: { $ne: true } });
+  next();
+});
+
+tourSchema.pre(/^find/, function (next) {
+  // populate is for polulating data for referneces fields here guides
+  // since it is a query middleware this always points to current query
+  this.populate({
+    path:'guides',
+    select:'-__v -passwordChangedAt', // these two fields will not appear in the output
+  });
   next();
 });
 
@@ -169,6 +180,8 @@ tourSchema.post(/^find/, function (docs, next) {
   // console.log(docs);
   next();
 });
+
+
 
 // AGGREGATION MIDDLEWARE
 // this here refers to current aggregation object
