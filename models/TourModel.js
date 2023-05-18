@@ -103,7 +103,7 @@ const tourSchema = new mongoose.Schema(
     guides:[
       {
         type: mongoose.Schema.ObjectId,
-        ref:'User', // User coolection is the reference here
+        ref:'User', // User collection is the reference here
       }
     ]
   },
