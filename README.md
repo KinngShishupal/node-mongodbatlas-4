@@ -7,3 +7,4 @@
 6. Populating Tour guides
 7. creating review model (parent referencing)
 8. creating and getting reviews
+9. populating reviews

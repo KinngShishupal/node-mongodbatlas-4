@@ -33,6 +33,19 @@ const reviewSchema = new mongoose.Schema({
     toObject: { virtuals: true },
 });
 
+reviewSchema.pre(/^find/, function (next) {
+    // populate is for polulating data for referneces fields here guides
+    // since it is a query middleware this always points to current query
+    this.populate({
+      path:'tour',
+      select:'name', // we want only tour name
+    }).populate({
+        path:'user',
+        select:'name photo', // these two fields will not appear in the output
+      });
+    next();
+  });
+
 const Review = mongoose.model('Review', reviewSchema);
 
 module.exports = Review;
