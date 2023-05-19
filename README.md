@@ -5,4 +5,5 @@
 4. Modelling Tour guides (connecting user document into tour document by Embedding)
 5. Modelling Tour guides (connecting user document into tour document by referencing) (child referencing)
 6. Populating Tour guides
-7. Modelling Tour guides (connecting user document into tour document by referencing) (parent referencing)
+7. creating review model (parent referencing)
+8. creating and getting reviews
