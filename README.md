@@ -8,3 +8,4 @@
 7. creating review model (parent referencing)
 8. creating and getting reviews
 9. populating reviews
+10. virtual populate both tours and reviews

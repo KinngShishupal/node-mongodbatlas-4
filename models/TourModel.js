@@ -100,7 +100,7 @@ const tourSchema = new mongoose.Schema(
       }
     ],
     // guides:Array, // here we will put all the guides ids who are engaged with this tour embedding example
-    guides:[
+    guides:[ 
       {
         type: mongoose.Schema.ObjectId,
         ref:'User', // User collection is the reference here
@@ -116,7 +116,17 @@ const tourSchema = new mongoose.Schema(
 // defining virtual properties, i.e those properties which are derived from one another
 // they are implemented only when we get data from data base
 tourSchema.virtual('durationWeeks').get(function () {
+  // this durationWeeks fields will only be reflected in the resposne but not in DB
   return this.duration / 7;
+});
+
+
+// to provide virtual populate for reviews so that tour also knows about their reviews;
+tourSchema.virtual('reviews',{
+  ref:'Review', // name the model that we want to reference
+  foreignField: 'tour', // name of the field in this Review model to which reference to current model i.e tour modal is stored 
+  localField: '_id', // name of the field in this tour model that stores the value in the foreign field
+  // justOne: true
 });
 
 // DOCUMENT MIDDLEWARE

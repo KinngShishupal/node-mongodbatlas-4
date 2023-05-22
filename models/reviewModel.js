@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 // Below is also an example of parent referencing as well 
 // we opt for parent referencing when we dont know how much our array will grow
 // ref to tour and ref to user
-// Basically every review knows to which tour and user they belong to, but user and tour have no idea about their reviews
+// Basically every review knows to which tour and user they belong to, but user and tour have no idea about their reviews, however this problem of parent not knowing about child can be solved by virtaul  populate
 
 const reviewSchema = new mongoose.Schema({
     review: {

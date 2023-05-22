@@ -215,12 +215,11 @@ const getAllTours = async (req, res) => {
 };
 
 const getTour = async (req, res, next) => {
-  try {
-    
-    const tour = await Tour.findById(req.params.id)
+  try{
+    const tour = await Tour.findById(req.params.id).populate('reviews'); // to populate reviews data in tours
     // Tour.findOne({_id:req.params.id}) same result as above
     if (!tour) {
-      return next(new AppError('No Tour Found With this id', 404));
+      return next(new AppError('No Tour Found With this id', 404));    
     }
     res.status(200).json({
       status: 'success',
