@@ -15,7 +15,9 @@ const {
   resetPassword,
   updatePassword,
   protect,
+  restrictTo,
 } = require('../controllers/authController');
+const { createReview } = require('../controllers/reviewController');
 
 const router = express.Router();
 
@@ -32,5 +34,8 @@ router.delete('/deleteMe',protect, deleteMe); // to allow user to his user data 
 router.route('/').get(getAllUsers).post(createUser);
 
 router.route('/:"id').get(getUser).patch(updateUser).delete(deleteUser);
+
+// Nested Routes
+router.route('/:tourId/reviews').post(protect, restrictTo('user'), createReview)
 
 module.exports = router;
