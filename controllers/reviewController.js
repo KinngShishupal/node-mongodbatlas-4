@@ -24,7 +24,14 @@ const createReview = async(req, res) => {
 
 const getAllReviews = async (req, res, next) => {
     try {
-        const reviews = await Review.find();
+        console.log('🍕🍜🍜🥟🥙🥗',req.params)
+        let filter={};
+        if(req.params.tourId){
+            filter ={
+                tour:req.params.tourId
+            }
+        }
+        const reviews = await Review.find(filter);
         res.status(200).json({
             status: 'success',
             results: reviews.length,

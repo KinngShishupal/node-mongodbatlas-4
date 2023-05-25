@@ -10,3 +10,5 @@
 9. populating reviews
 10. virtual populate both tours and reviews
 11. Simple Nested Routes
+12. Nested Route with express
+13. Nested GET Endpoint 
