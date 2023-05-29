@@ -1,9 +1,10 @@
 const express = require('express');
-const { createReview, getAllReviews } = require('../controllers/reviewController');
+const { createReview, getAllReviews, deleteReview } = require('../controllers/reviewController');
 const { restrictTo, protect } = require('../controllers/authController');
 // by default each router has only access to their routes not others so meregePrams come into picture at this point
 const router = express.Router({ mergeParams:true}); // mergeParams provides access to parameters if it had been rerouter from some where else see tourRoutes for explanation
 
 router.route('/').get(getAllReviews).post(protect,restrictTo('user'),  createReview);
+router.route('/:id').delete(deleteReview)
 
 module.exports = router;

@@ -12,3 +12,4 @@
 11. Simple Nested Routes
 12. Nested Route with express
 13. Nested GET Endpoint 
+14. Handler factory function: delete

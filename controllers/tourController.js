@@ -171,6 +171,7 @@ With Class
 const Tour = require('../models/TourModel');
 const APIFeatures = require('../utils/apiFeatures');
 const AppError = require('../utils/appError');
+const factory = require('./handlerFactory')
 
 const aliasTopTours = async (req, res, next) => {
   // here well modify query for best five budget tours
@@ -274,25 +275,27 @@ const updateTour = async (req, res, next) => {
     });
   }
 };
-const deleteTour = async (req, res, next) => {
-  try {
-    const tour = await Tour.findByIdAndDelete(req.params.id);
-    if (!tour) {
-      return next(new AppError('No Tour Found With this id', 404));
-    }
-    res.status(204).json({
-      status: 'success',
-      data: {
-        tour: tour,
-      },
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: 'fail',
-      message: error,
-    });
-  }
-};
+
+const deleteTour = factory.deleteOne(Tour); // this here is complete replacement for below code
+// const deleteTour = async (req, res, next) => {
+//   try {
+//     const tour = await Tour.findByIdAndDelete(req.params.id);
+//     if (!tour) {
+//       return next(new AppError('No Tour Found With this id', 404));
+//     }
+//     res.status(204).json({
+//       status: 'success',
+//       data: {
+//         tour: tour,
+//       },
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       status: 'fail',
+//       message: error,
+//     });
+//   }
+// };
 
 const getTourStats = async (req, res) => {
   // Aggregation pipeline

@@ -1,4 +1,5 @@
-const Review = require("../models/reviewModel")
+const Review = require("../models/reviewModel");
+const factory = require('./handlerFactory');
 
 const createReview = async(req, res) => {
     try {
@@ -47,6 +48,8 @@ const getAllReviews = async (req, res, next) => {
     }
 }
 
+const deleteReview = factory.deleteOne(Review);
+
 module.exports = {
-    createReview, getAllReviews
+    createReview, getAllReviews, deleteReview
 }

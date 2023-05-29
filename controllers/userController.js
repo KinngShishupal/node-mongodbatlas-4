@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const AppError = require("../utils/appError");
+const factory = require('./handlerFactory');
 
 const filterObj = (obj, ...allowedFields)=>{
   const newObj = {};
@@ -32,7 +33,7 @@ const createUser = (req, res) => {};
 
 const getUser = (req, res) => {};
 const updateUser = (req, res) => {};
-const deleteUser = (req, res) => {};
+const deleteUser = factory.deleteOne(User);
 
 const updateMe = async(req, res , next) =>{
 try {
