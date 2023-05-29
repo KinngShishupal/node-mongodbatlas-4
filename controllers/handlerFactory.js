@@ -23,7 +23,30 @@ try {
 }
 }
 
-module.exports = {deleteOne};
+const updateOne = Model=>async (req, res, next) => {
+    try {
+      const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true,
+      });
+      if (!doc) {
+        return next(new AppError('No Doc Found With this id', 404));
+      }
+      res.status(201).json({
+        status: 'success',
+        data: {
+          data: doc,
+        },
+      });
+    } catch (error) {
+      res.status(400).json({
+        status: 'fail',
+        message: error,
+      });
+    }
+  };
+
+module.exports = {deleteOne, updateOne};
       
 
 // FOR REFERENCE
@@ -46,3 +69,27 @@ module.exports = {deleteOne};
 //       });
 //     }
 //   }; 
+
+
+// const updateTour = async (req, res, next) => {
+//     try {
+//       const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+//         new: true,
+//         runValidators: true,
+//       });
+//       if (!tour) {
+//         return next(new AppError('No Tour Found With this id', 404));
+//       }
+//       res.status(201).json({
+//         status: 'success',
+//         data: {
+//           tour: tour,
+//         },
+//       });
+//     } catch (error) {
+//       res.status(400).json({
+//         status: 'fail',
+//         message: error,
+//       });
+//     }
+//   };

@@ -253,28 +253,29 @@ const createTour = async (req, res) => {
   }
 };
 
-const updateTour = async (req, res, next) => {
-  try {
-    const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!tour) {
-      return next(new AppError('No Tour Found With this id', 404));
-    }
-    res.status(201).json({
-      status: 'success',
-      data: {
-        tour: tour,
-      },
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: 'fail',
-      message: error,
-    });
-  }
-};
+const updateTour = factory.updateOne(Tour);
+// const updateTour = async (req, res, next) => {
+//   try {
+//     const tour = await Tour.findByIdAndUpdate(req.params.id, req.body, {
+//       new: true,
+//       runValidators: true,
+//     });
+//     if (!tour) {
+//       return next(new AppError('No Tour Found With this id', 404));
+//     }
+//     res.status(201).json({
+//       status: 'success',
+//       data: {
+//         tour: tour,
+//       },
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       status: 'fail',
+//       message: error,
+//     });
+//   }
+// };
 
 const deleteTour = factory.deleteOne(Tour); // this here is complete replacement for below code
 // const deleteTour = async (req, res, next) => {

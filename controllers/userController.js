@@ -32,7 +32,7 @@ const getAllUsers = async(req, res) => {
 const createUser = (req, res) => {};
 
 const getUser = (req, res) => {};
-const updateUser = (req, res) => {};
+const updateUser = factory.updateOne(User);
 const deleteUser = factory.deleteOne(User);
 
 const updateMe = async(req, res , next) =>{
