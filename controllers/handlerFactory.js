@@ -46,7 +46,24 @@ const updateOne = Model=>async (req, res, next) => {
     }
   };
 
-module.exports = {deleteOne, updateOne};
+  const createOne = Model=> async (req, res) => {
+    try {
+      const doc = await Model.create(req.body);
+      res.status(201).json({
+        status: 'success',
+        data: {
+          data: doc,
+        },
+      });
+    } catch (error) {
+      res.status(400).json({
+        status: 'fail',
+        message: error,
+      });
+    }
+  };
+
+module.exports = {deleteOne, updateOne, createOne};
       
 
 // FOR REFERENCE
@@ -84,6 +101,23 @@ module.exports = {deleteOne, updateOne};
 //         status: 'success',
 //         data: {
 //           tour: tour,
+//         },
+//       });
+//     } catch (error) {
+//       res.status(400).json({
+//         status: 'fail',
+//         message: error,
+//       });
+//     }
+//   };
+
+// const createTour = async (req, res) => {
+//     try {
+//       const newTour = await Tour.create(req.body);
+//       res.status(201).json({
+//         status: 'success',
+//         data: {
+//           tour: newTour,
 //         },
 //       });
 //     } catch (error) {

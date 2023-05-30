@@ -236,22 +236,23 @@ const getTour = async (req, res, next) => {
   }
 };
 
-const createTour = async (req, res) => {
-  try {
-    const newTour = await Tour.create(req.body);
-    res.status(201).json({
-      status: 'success',
-      data: {
-        tour: newTour,
-      },
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: 'fail',
-      message: error,
-    });
-  }
-};
+const createTour = factory.createOne(Tour);
+// const createTour = async (req, res) => {
+//   try {
+//     const newTour = await Tour.create(req.body);
+//     res.status(201).json({
+//       status: 'success',
+//       data: {
+//         tour: newTour,
+//       },
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       status: 'fail',
+//       message: error,
+//     });
+//   }
+// };
 
 const updateTour = factory.updateOne(Tour);
 // const updateTour = async (req, res, next) => {

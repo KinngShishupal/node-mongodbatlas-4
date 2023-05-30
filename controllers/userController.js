@@ -29,6 +29,7 @@ const getAllUsers = async(req, res) => {
     });
   }
 };
+// we have sign up for this
 const createUser = (req, res) => {};
 
 const getUser = (req, res) => {};
