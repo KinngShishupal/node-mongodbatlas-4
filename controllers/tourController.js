@@ -188,53 +188,56 @@ const aliasTopTours = async (req, res, next) => {
   }
 };
 
-const getAllTours = async (req, res) => {
-  try {
-    // console.log('xxxxxxxxx', req.query);
-    // EXECUTE QUERY
-    const features = new APIFeatures(Tour.find(), req.query)
-      .filter()
-      .sort()
-      .limitFields()
-      .paginate();
+const getAllTours = factory.getAll(Tour);
+// const getAllTours = async (req, res) => {
+//   try {
+//     // console.log('xxxxxxxxx', req.query);
+//     // EXECUTE QUERY
+//     const features = new APIFeatures(Tour.find(), req.query)
+//       .filter()
+//       .sort()
+//       .limitFields()
+//       .paginate();
 
-    const tours = await features.query;
+//     const tours = await features.query;
 
-    res.status(200).json({
-      status: 'success',
-      results: tours.length,
-      data: {
-        tours,
-      },
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: 'fail',
-      message: error,
-    });
-  }
-};
+//     res.status(200).json({
+//       status: 'success',
+//       results: tours.length,
+//       data: {
+//         tours,
+//       },
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       status: 'fail',
+//       message: error,
+//     });
+//   }
+// };
 
-const getTour = async (req, res, next) => {
-  try{
-    const tour = await Tour.findById(req.params.id).populate('reviews'); // to populate reviews data in tours
-    // Tour.findOne({_id:req.params.id}) same result as above
-    if (!tour) {
-      return next(new AppError('No Tour Found With this id', 404));    
-    }
-    res.status(200).json({
-      status: 'success',
-      data: {
-        tour,
-      },
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: 'fail',
-      message: error,
-    });
-  }
-};
+const getTour = factory.getOne(Tour,{path:'reviews'});
+
+// const getTour = async (req, res, next) => {
+//   try{
+//     const tour = await Tour.findById(req.params.id).populate('reviews'); // to populate reviews data in tours
+//     // Tour.findOne({_id:req.params.id}) same result as above
+//     if (!tour) {
+//       return next(new AppError('No Tour Found With this id', 404));    
+//     }
+//     res.status(200).json({
+//       status: 'success',
+//       data: {
+//         tour,
+//       },
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       status: 'fail',
+//       message: error,
+//     });
+//   }
+// };
 
 const createTour = factory.createOne(Tour);
 // const createTour = async (req, res) => {

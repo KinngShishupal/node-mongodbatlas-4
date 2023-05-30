@@ -59,7 +59,8 @@ const getAllReviews = async (req, res, next) => {
 
 const deleteReview = factory.deleteOne(Review);
 const updateReview = factory.updateOne(Review);
+const getReview = factory.getOne(Review);
 
 module.exports = {
-    createReview, getAllReviews, deleteReview, updateReview, setTourUserIds
+    createReview, getAllReviews, deleteReview, updateReview, setTourUserIds, getReview
 }

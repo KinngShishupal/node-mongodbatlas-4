@@ -12,27 +12,29 @@ Object.keys(obj).forEach(el=>{
 return newObj
 }
 
-const getAllUsers = async(req, res) => {
-  try {
-    const users = await User.find()
-    res.status(200).json({
-      status: 'success',
-      results:users.length,
-      data: {
-        users,
-      },
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: 'fail',
-      message: error,
-    });
-  }
-};
+const getAllUsers = factory.getAll(User);
+
+// const getAllUsers = async(req, res) => {
+//   try {
+//     const users = await User.find()
+//     res.status(200).json({
+//       status: 'success',
+//       results:users.length,
+//       data: {
+//         users,
+//       },
+//     });
+//   } catch (error) {
+//     res.status(400).json({
+//       status: 'fail',
+//       message: error,
+//     });
+//   }
+// };
 // we have sign up for this
 const createUser = (req, res) => {};
 
-const getUser = (req, res) => {};
+const getUser = factory.getOne(User);
 const updateUser = factory.updateOne(User);
 const deleteUser = factory.deleteOne(User);
 

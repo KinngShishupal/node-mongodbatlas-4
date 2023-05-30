@@ -14,3 +14,4 @@
 13. Nested GET Endpoint 
 14. Handler factory function: delete
 15. Handler factory function: update & create
+16. Handler factory function: reading
