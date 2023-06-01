@@ -81,6 +81,13 @@ const deleteMe = async(req, res , next) =>{
   }
 }
 
+const getMe = (req, res, next)=>{
+  // we will be using getOne factory function, but that requires id so proviing one as below
+  console.log('hhhhhhhhhhhhh',req)
+  req.params.id = req.user.id; //
+  next();
+}
+
 module.exports = {
   getAllUsers,
   createUser,
@@ -88,5 +95,6 @@ module.exports = {
   updateUser,
   deleteUser,
   updateMe,
-  deleteMe
+  deleteMe,
+  getMe
 };

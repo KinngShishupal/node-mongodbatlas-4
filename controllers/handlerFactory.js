@@ -67,6 +67,7 @@ const updateOne = Model=>async (req, res, next) => {
   const getOne=(Model, populateOptions) => async (req, res, next) => {
     try{
 
+      console.log('rrrrrrrrrrrrrr', req.params)
         let query = Model.findById(req.params.id);
         if(populateOptions) query = query.populate(populateOptions);
         const doc = await query;

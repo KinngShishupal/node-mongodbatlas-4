@@ -25,10 +25,10 @@ router.use('/:tourId/reviews',reviewRouter);
 router.route('/top-5-cheap').get(aliasTopTours, getAllTours);
 
 router.route('/tour-stats').get(getTourStats); // aggregation pipeline
-router.route('/monthly-plan/:year').get(getMonthlyPlan); // aggregation pipeline advanced
+router.route('/monthly-plan/:year').get(protect,restrictTo('admin','lead-guide','guide'),getMonthlyPlan); // aggregation pipeline advanced
 
-router.route('/').get(protect, getAllTours).post(createTour); //protect is actually is middleware whose job is to check if user have access to particular route
-router.route('/:id').get(getTour).patch(updateTour).delete(protect,restrictTo('admin','lead-guide'),deleteTour);
+router.route('/').get(getAllTours).post(protect,restrictTo('admin','lead-guide'),createTour); //protect is actually is middleware whose job is to check if user have access to particular route
+router.route('/:id').get(getTour).patch(protect,restrictTo('admin','lead-guide'),updateTour).delete(protect,restrictTo('admin','lead-guide'),deleteTour);
 
 // Nested Routes
 // creating a review for particular tour id although this fulfilles our requirement but we need a more advanced way to handle this
