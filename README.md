@@ -17,3 +17,7 @@
 16. Handler factory function: reading
 17. Adding a /me endpoint 
 18. Adding missing authentication and authorization
+
+
+<!-- Front end  -->
+1. Setting Pug templates, we have other template engines a well like handlebars and ejs etc

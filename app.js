@@ -12,6 +12,13 @@ const helmet = require('helmet'); //for secure http headers
 const mongoSanitize = require('express-mongo-sanitize'); // for data sanitization
 const  xss = require('xss-clean'); // for data sanitization
 const hpp = require('hpp'); // to restrict duplicates in the query string
+const path = require('path');
+
+// setting pug template engine
+app.set('view engine','pug');
+app.set('views',path.join(__dirname, 'views')); // location where our views are located we always provide path relative to the file from which our node application is running
+// serving static files
+app.use(express.static(path.join(__dirname,'public')));
 
 // Global MIddlewares
 // adding helmet
@@ -57,6 +64,9 @@ app.use((req, res, next) => {
 });
 
 // Routes
+app.get('/',(req, res, next)=>{
+  res.status(200).render('base'); // system will look for base file in views folder specified above
+})
 app.use('/api/v1/tours', tourRouter); // this is called mounting of routers
 app.use('/api/v1/users', useRouter);
 app.use('/api/v1/reviews', reviewRouter);
