@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const slugify = require('slugify');
 const tourSchema = new mongoose.Schema(
   {
     name: {
@@ -9,6 +10,7 @@ const tourSchema = new mongoose.Schema(
       maxlength: [40, 'Name Should be less than 40'],
       minlength: [5, 'Name Should be more than 5'],
     },
+    slug:String,
     price: {
       type: Number,
       required: true,
@@ -133,9 +135,13 @@ tourSchema.virtual('reviews',{
 // runs before .save() and .create()
 // next is required only if we have more than one document middleware
 // this below refers to currently processed document
+// tourSchema.pre('save', function (next) {
+//   this.name = this.name.toUpperCase(); // this simple converts the name to uppercase
+// });
+
 tourSchema.pre('save', function (next) {
-  this.name = this.name.toUpperCase(); // this simple converts the name to uppercase
-  next();
+  this.slug = slugify(this.name,{lower:true})
+  next()
 });
 
 // connecting user document into tour document by Embedding
