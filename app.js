@@ -65,7 +65,9 @@ app.use((req, res, next) => {
 
 // Routes
 app.get('/',(req, res, next)=>{
-  res.status(200).render('base'); // system will look for base file in views folder specified above
+  res.status(200).render('base',{
+    tour: 'The Forest Hiker'
+  }); // system will look for base file in views folder specified above
 })
 app.use('/api/v1/tours', tourRouter); // this is called mounting of routers
 app.use('/api/v1/users', useRouter);

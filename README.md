@@ -21,3 +21,4 @@
 
 <!-- Front end  -->
 1. Setting Pug templates, we have other template engines a well like handlebars and ejs etc
+2. Creating basic pug template
