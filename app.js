@@ -4,7 +4,8 @@ const fs = require('fs');
 const morgan = require('morgan');
 const tourRouter = require('./routes/tourRoutes');
 const useRouter = require('./routes/userRoutes');
-const reviewRouter = require('./routes/reviewRoutes')
+const reviewRouter = require('./routes/reviewRoutes');
+const viewRouter = require('./routes/viewRoutes')
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const rateLimit = require('express-rate-limit');
@@ -64,26 +65,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.get('/',(req, res)=>{
-  res.status(200).render('base',{
-    tour: 'The Forest Hiker',
-    user:'ShiShupal Singh'
-  }); // system will look for base file in views folder specified above
-});
-
-app.get('/overview',(req, res)=>{
-  res.status(200).render('overview',{
-    title: 'All Tours'
-  }); // system will look for base file in views folder specified above
-});
-
-app.get('/tour',(req, res)=>{
-  res.status(200).render('tour',{
-    title: 'The Forest Hiker'
-  }); // system will look for base file in views folder specified above
-})
-
-
+app.use('/', viewRouter); // for rendering views
 app.use('/api/v1/tours', tourRouter); // this is called mounting of routers
 app.use('/api/v1/users', useRouter);
 app.use('/api/v1/reviews', reviewRouter);
