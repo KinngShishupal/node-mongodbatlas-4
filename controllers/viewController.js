@@ -19,9 +19,18 @@ const tours = await Tour.find();
     }
   }
   
-  const getTour =(req, res)=>{
+  const getTour =async (req, res)=>{
+
+    // 1. get the data based on requested tour (including reviews and routes)
+    const tour = await Tour.findOne({slug: req.params.slug}).populate({
+      path:'reviews',
+      fields:'review rating user'
+    })
+    // 2 Build Template
+    // 3. Renderthe template using data from step 1
     res.status(200).render('tour',{
-      title: 'The Forest Hiker'
+      title: 'The Forest Hiker',
+      tour
     }); // system will look for base file in views folder specified above
   }
 
