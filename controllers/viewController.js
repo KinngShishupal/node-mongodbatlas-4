@@ -29,11 +29,17 @@ const tours = await Tour.find();
     // 2 Build Template
     // 3. Renderthe template using data from step 1
     res.status(200).render('tour',{
-      title: 'The Forest Hiker',
+      title: `${tour.name} Tour`,
       tour
     }); // system will look for base file in views folder specified above
   }
 
+  const getLoginForm = async (req, res) =>{
+    res.status(200).render('login',{
+      title: 'Login'
+    })
+  }
+
 module.exports = {
-    getOverview, getTour
+    getOverview, getTour, getLoginForm
 }

@@ -25,3 +25,4 @@
 3. Creating routes and controller for views
 4. Creating Tour Overview Page
 5. creating tour detail page
+6. Mapbox Integration
